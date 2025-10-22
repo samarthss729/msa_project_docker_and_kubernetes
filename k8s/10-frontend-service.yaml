@@ -19,7 +19,7 @@ spec:
       - name: frontend-service
         image: samarth00729/job-portal-frontend-service:latest
         ports:
-        - containerPort: 8085
+        - containerPort: 8086
         envFrom:
         - configMapRef:
             name: job-portal-config
@@ -33,13 +33,13 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8085
+            port: 8086
           initialDelaySeconds: 60
           periodSeconds: 30
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8085
+            port: 8086
           initialDelaySeconds: 30
           periodSeconds: 10
 ---
@@ -52,6 +52,6 @@ spec:
   selector:
     app: frontend-service
   ports:
-  - port: 8085
-    targetPort: 8085
+  - port: 8086
+    targetPort: 8086
   type: ClusterIP

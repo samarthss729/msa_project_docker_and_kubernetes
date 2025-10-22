@@ -119,7 +119,7 @@ services:
     image: samarth00729/job-portal-frontend-service:latest
     container_name: frontend-service
     ports:
-      - "8085:8085"
+      - "8085:8086"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka-server:8761/eureka/
