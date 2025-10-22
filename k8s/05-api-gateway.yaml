@@ -19,7 +19,7 @@ spec:
       - name: api-gateway
         image: samarth00729/job-portal-api-gateway:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8085
         envFrom:
         - configMapRef:
             name: job-portal-config
@@ -33,13 +33,13 @@ spec:
         livenessProbe:
           httpGet:
             path: /actuator/health
-            port: 8080
+            port: 8085
           initialDelaySeconds: 60
           periodSeconds: 30
         readinessProbe:
           httpGet:
             path: /actuator/health
-            port: 8080
+            port: 8085
           initialDelaySeconds: 30
           periodSeconds: 10
 ---
@@ -52,6 +52,6 @@ spec:
   selector:
     app: api-gateway
   ports:
-  - port: 8080
-    targetPort: 8080
+  - port: 8085
+    targetPort: 8085
   type: ClusterIP
