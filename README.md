@@ -176,3 +176,4 @@ All services use the same MySQL database:
 - All services use the same database (in production, consider separate databases)
 
 
+"# CI/CD Pipeline Active" 
