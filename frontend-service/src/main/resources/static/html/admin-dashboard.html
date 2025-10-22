@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+        body { background-color: #F3F3F3; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: black; overflow: hidden; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav ul { list-style: none; display: flex; align-items: center; }
+        nav li { margin: 0 15px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; padding: 8px 12px; }
+        nav a:hover { background-color: #7BC3C4; border-radius: 5px; }
+        h2 { text-align: center; margin: 30px 0 10px; color: #333; }
+        .add-job-link { text-align: center; margin-bottom: 30px; }
+        .add-job-link a { padding: 10px 20px; background-color: #04AA6D; color: white; border: none; border-radius: 6px; text-decoration: none; font-weight: bold; }
+        .add-job-link a:hover { background-color: #038f5b; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 40px 50px; }
+        .job-card { background-color: white; border: 1px solid #ccc; border-radius: 10px; padding: 20px; box-shadow: 2px 2px 12px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .job-card:hover { transform: translateY(-5px); }
+        .job-title { font-size: 1.3em; font-weight: bold; margin-bottom: 8px; }
+        .company-name { color: #777; margin-bottom: 10px; }
+        .action-links a { text-decoration: none; margin-right: 15px; font-weight: bold; }
+        .action-links a.edit { color: #007BFF; }
+        .action-links a.delete { color: red; }
+        .footer { background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto; }
+        .footer p { margin: 5px 0; }
+        .footer a { color: white; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .social-media { margin: 10px 0; }
+        .social-media a { margin: 0 10px; text-decoration: none; display: inline-block; }
+        .social-media img { width: 30px; height: 30px; vertical-align: middle; }
+        .social-media a:hover img { filter: brightness(0.8); }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <img src="/jobs-portal.jpg" width="70" height="70">
+            <a href="#" class="logo">Job Portal</a>
+        </ul>
+        <ul>
+            <li>
+                <button onclick="logout()" style="background:none;border:none;color:white;font-weight:bold;cursor:pointer">Logout</button>
+            </li>
+        </ul>
+    </nav>
+
+    <h2>Admin Dashboard</h2>
+
+    <div class="add-job-link">
+        <a href="/html/admin-add-job.html">+ Add New Job</a>
+        <a href="/html/admin-final-application.html" style="margin-left: 15px;">View Final Applications</a>
+    </div>
+
+    <div class="grid-container" id="jobs-container">
+        <!-- Jobs will be loaded dynamically -->
+    </div>
+
+  <footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+      <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+          <a href="tel:+919930366803">+91 9930366803</a> <br>
+          <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+          <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+      </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+
+<script>
+async function loadJobs() {
+    try {
+        const response = await fetch('http://localhost:8085/api/jobs');
+        const jobs = await response.json();
+        
+        const container = document.getElementById('jobs-container');
+        container.innerHTML = '';
+        
+        jobs.forEach(job => {
+            const jobCard = document.createElement('div');
+            jobCard.className = 'job-card';
+            jobCard.innerHTML = `
+                <div class="job-title">${job.jobTitle}</div>
+                <div class="company-name">Company: ${job.company}</div>
+                <div><strong>Role:</strong> ${job.role}</div>
+                <div class="action-links" style="margin-top: 10px;">
+                    <a href="#" class="delete" onclick="deleteJob(${job.id})">Delete</a>
+                </div>
+            `;
+            container.appendChild(jobCard);
+        });
+    } catch (error) {
+        console.error('Error loading jobs:', error);
+    }
+}
+
+async function deleteJob(jobId) {
+    if (confirm('Are you sure you want to delete this job?')) {
+        try {
+        const response = await fetch(`http://localhost:8085/api/jobs/${jobId}`, {
+                method: 'DELETE'
+            });
+            
+            if (response.ok) {
+                loadJobs(); // Reload the jobs list
+            } else {
+                alert('Failed to delete job');
+            }
+        } catch (error) {
+            console.error('Error deleting job:', error);
+            alert('Failed to delete job');
+        }
+    }
+}
+
+async function logout() {
+    try {
+        const response = await fetch('http://localhost:8085/api/admin/logout', {
+            method: 'POST'
+        });
+        
+        if (response.ok) {
+            window.location.href = '/html/admin-login.html';
+        }
+    } catch (error) {
+        console.error('Error logging out:', error);
+        window.location.href = '/html/admin-login.html';
+    }
+}
+
+// Load jobs when page loads
+document.addEventListener('DOMContentLoaded', loadJobs);
+</script>
+</body>
+</html>
+
+

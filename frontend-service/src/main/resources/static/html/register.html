@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registration</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #e9ecef; margin: 0; }
+        nav { background-color: #333; overflow: hidden; }
+        nav a { float: left; display: block; color: white; text-align: center; padding: 14px 20px; text-decoration: none; }
+        nav a:hover { background-color: #ddd; color: black; }
+        .container { max-width: 600px; margin: 50px auto; padding: 30px; }
+        .card { background-color: white; border-radius: 16px; padding: 70px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; margin-bottom: 20px; color: #333; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        input[type=text], input[type=password], select { width: 100%; padding: 12px; margin: 8px 0 16px; border: 1px solid #ccc; border-radius: 6px; background-color: #f9f9f9; }
+        input[type=text]:focus, input[type=password]:focus, select:focus { outline: none; border-color: #04AA6D; background-color: #fff; }
+        .btn { width: 100%; background-color: #04AA6D; color: white; padding: 14px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; transition: background-color 0.3s; margin-top: 10px; }
+        .btn:hover { background-color: #028f5b; }
+        .links { text-align: center; margin-top: 20px; }
+        .links a { color: #04AA6D; text-decoration: none; }
+        .links a:hover { text-decoration: underline; }
+        .image-container { text-align: center; margin-bottom: 20px; }
+        .image-container img { max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .notice { text-align:center; font-size: 16px; margin-bottom: 12px; }
+        .notice.success { color: green; }
+        .notice.error { color: red; }
+        .footer { background-color:black; color: white; text-align: center; padding: 20px 0; margin-top: auto; }
+        .footer p { margin: 5px 0; }
+        .footer a { color: white; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .social-media { margin: 10px 0; }
+        .social-media a { margin: 0 10px; text-decoration: none; color: #FFD700; display: inline-block; }
+        .social-media a img { width: 30px; height: 30px; vertical-align: middle; }
+        .social-media a:hover img { filter: brightness(0.8); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="/html/index.html">Home</a>
+    <a href="/html/login.html">Login</a>
+    <a href="/html/register.html">Register</a>
+</nav>
+
+<div class="container">
+    <div class="card">
+        <h1>Registration Form</h1>
+        <div class="image-container">
+            <img src="/image4.jpg" alt="Registration Image">
+        </div>
+
+        <div id="success-message" class="notice success" style="display: none;">Successfully Recorded...</div>
+        <div id="error-message" class="notice error" style="display: none;">Registration failed. Please try again.</div>
+
+        <form id="registration-form">
+            <label>Username</label>
+            <input type="text" name="username" id="username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" id="password" required>
+
+            <label>First Name</label>
+            <input type="text" name="firstName" id="firstName" required>
+
+            <label>Last Name</label>
+            <input type="text" name="lastName" id="lastName" required>
+
+            <label>Mobile/Phone no.</label>
+            <input type="text" name="mobileNumber" id="mobileNumber" required>
+
+            <label>Address</label>
+            <input type="text" name="address" id="address" required>
+
+            <label>State</label>
+            <select name="state" id="state" required>
+                <option value="" disabled selected="selected">Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                <option value="Ladakh">Ladakh</option>
+                <option value="Puducherry">Puducherry</option>
+            </select>
+
+            <label>Pin</label>
+            <input type="text" name="pin" id="pin" required>
+
+            <button type="submit" class="btn">Register</button>
+
+            <div class="links">
+                <p>Already have an Account? <a href="/html/login.html">Login</a></p>
+                <p>Back to <a href="/html/index.html">Home</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+            <a href="tel:+919930366803">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+
+<script>
+document.getElementById('registration-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        mobileNumber: document.getElementById('mobileNumber').value,
+        address: document.getElementById('address').value,
+        state: document.getElementById('state').value,
+        pin: document.getElementById('pin').value
+    };
+    
+    const successDiv = document.getElementById('success-message');
+    const errorDiv = document.getElementById('error-message');
+    
+    try {
+        const response = await fetch('http://localhost:8085/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (response.ok) {
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            document.getElementById('registration-form').reset();
+        } else {
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+    } catch (error) {
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+    }
+});
+</script>
+
+</body>
+</html>
+
+

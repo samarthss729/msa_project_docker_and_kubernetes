@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Job</title>
+    <style>
+        * { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+        body { background-color: #F3F3F3; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: black; overflow: hidden; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav ul { list-style: none; display: flex; align-items: center; }
+        nav li { margin: 0 15px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; padding: 8px 12px; }
+        nav a:hover { background-color: #7BC3C4; border-radius: 5px; }
+        .container { max-width: 800px; margin: 30px auto; padding: 20px; }
+        .card { background-color: white; border-radius: 16px; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { text-align: center; margin-bottom: 30px; color: #333; }
+        label { font-weight: bold; display: block; margin-top: 15px; }
+        input[type=text], input[type=number], textarea, select { width: 100%; padding: 12px; margin: 8px 0 16px; border: 1px solid #ccc; border-radius: 6px; background-color: #f9f9f9; }
+        input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus { outline: none; border-color: #04AA6D; background-color: #fff; }
+        textarea { height: 100px; resize: vertical; }
+        .btn { background-color: #04AA6D; color: white; padding: 14px 30px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; margin-right: 10px; }
+        .btn:hover { background-color: #028f5b; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #545b62; }
+        .footer { background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto; }
+        .footer p { margin: 5px 0; }
+        .footer a { color: white; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .social-media { margin: 10px 0; }
+        .social-media a { margin: 0 10px; text-decoration: none; display: inline-block; }
+        .social-media img { width: 30px; height: 30px; vertical-align: middle; }
+        .social-media a:hover img { filter: brightness(0.8); }
+        .notice { text-align: center; font-size: 16px; margin-bottom: 12px; }
+        .notice.success { color: green; }
+        .notice.error { color: red; }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <img src="/jobs-portal.jpg" width="70" height="70">
+            <a href="#" class="logo">Job Portal</a>
+        </ul>
+        <ul>
+            <li><a href="/html/admin-dashboard.html">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h1>Add New Job</h1>
+
+            <div id="success-message" class="notice success" style="display: none;">Job added successfully!</div>
+            <div id="error-message" class="notice error" style="display: none;">Failed to add job. Please try again.</div>
+
+            <form id="add-job-form">
+                <h2>Listing</h2>
+                <label>Job Title</label>
+                <input type="text" name="jobTitle" id="jobTitle" required>
+
+                <label>Company</label>
+                <input type="text" name="company" id="company" required>
+
+                <label>Role</label>
+                <input type="text" name="role" id="role" required>
+
+                <label>Description</label>
+                <textarea name="description" id="description"></textarea>
+
+                <label>Logo Image Path</label>
+                <input type="text" name="logoPath" id="logoPath">
+
+                <h2>Job Description (Detailed)</h2>
+
+                <label>Intro</label>
+                <textarea name="intro" id="intro"></textarea>
+
+                <label>Website</label>
+                <input type="text" name="website" id="website">
+
+                <label>Full Description</label>
+                <textarea name="fullDescription" id="fullDescription"></textarea>
+
+                <label>Location</label>
+                <input type="text" name="location" id="location">
+
+                <label>Experience</label>
+                <input type="text" name="experience" id="experience">
+
+                <label>Skill Set</label>
+                <textarea name="skillSet" id="skillSet"></textarea>
+
+                <label>Industry Type</label>
+                <input type="text" name="industryType" id="industryType">
+
+                <label>Department</label>
+                <input type="text" name="department" id="department">
+
+                <label>Employment Type</label>
+                <input type="text" name="employmentType" id="employmentType">
+
+                <label>Role Category</label>
+                <input type="text" name="roleCategory" id="roleCategory">
+
+                <label>UG Education</label>
+                <textarea name="ugEducation" id="ugEducation"></textarea>
+
+                <label>PG Education</label>
+                <textarea name="pgEducation" id="pgEducation"></textarea>
+
+                <label>Key Skills</label>
+                <textarea name="keySkills" id="keySkills"></textarea>
+
+                <button type="submit" class="btn">Add Job</button>
+                <a href="/html/admin-dashboard.html" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+            <a href="tel:+919930366803">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+
+<script>
+document.getElementById('add-job-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        jobTitle: document.getElementById('jobTitle').value,
+        company: document.getElementById('company').value,
+        role: document.getElementById('role').value,
+        description: document.getElementById('description').value,
+        logoPath: document.getElementById('logoPath').value,
+
+        intro: document.getElementById('intro').value,
+        website: document.getElementById('website').value,
+        fullDescription: document.getElementById('fullDescription').value,
+        location: document.getElementById('location').value,
+        experience: document.getElementById('experience').value,
+        skillSet: document.getElementById('skillSet').value,
+        industryType: document.getElementById('industryType').value,
+        department: document.getElementById('department').value,
+        employmentType: document.getElementById('employmentType').value,
+        roleCategory: document.getElementById('roleCategory').value,
+        ugEducation: document.getElementById('ugEducation').value,
+        pgEducation: document.getElementById('pgEducation').value,
+        keySkills: document.getElementById('keySkills').value
+    };
+    
+    const successDiv = document.getElementById('success-message');
+    const errorDiv = document.getElementById('error-message');
+    
+    try {
+        const response = await fetch('http://localhost:8085/api/jobs', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (response.ok) {
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+            document.getElementById('add-job-form').reset();
+            setTimeout(() => {
+                window.location.href = '/html/admin-dashboard.html';
+            }, 1500);
+        } else {
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+    } catch (error) {
+        errorDiv.style.display = 'block';
+        successDiv.style.display = 'none';
+    }
+});
+</script>
+</body>
+</html>
+
+

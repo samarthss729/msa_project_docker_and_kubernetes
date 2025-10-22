@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Final Application</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px; }
+        h1 { text-align: center; margin-bottom: 40px; }
+        .container { display: flex; justify-content: space-between; max-width: 1200px; margin: auto; }
+        .form-card { background-color: #ffffff; padding: 70px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 500px; }
+        .form-card input[type=text], .form-card select { width: 100%; padding: 12px 15px; margin: 10px 0 20px 0; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; }
+        .form-card input[type=radio] { margin-right: 5px; }
+        .form-card label { font-weight: bold; }
+        .form-card .btn { background-color: #04AA6D; color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; cursor: pointer; font-size: 16px; margin-top: 10px; }
+        .form-card .btn:hover { background-color: #038d5d; }
+        .image-side { width: 600px; }
+        .image-side img { width: 100%; height: auto; border-radius: 15px; }
+        .back-button { background-color: #04AA6D; color: white; padding: 10px 20px; border: none; cursor: pointer; text-decoration: none; position: absolute; top: 20px; right: 20px; border-radius: 5px; }
+        .back-button:hover { background-color: #035c4b; }
+        .msg { text-align: center; margin-bottom: 15px; }
+    </style>
+    <script>
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const company = getQueryParam('company');
+            if (company) {
+                const input = document.getElementById('companyName');
+                if (input) input.value = decodeURIComponent(company);
+            }
+        });
+
+        async function submitForm(event) {
+            event.preventDefault();
+            const payload = {
+                firstName: document.querySelector('input[name="t1"]').value.trim(),
+                lastName: document.querySelector('input[name="t2"]').value.trim(),
+                dateOfBirth: document.querySelector('input[name="t3"]').value.trim(),
+                gender: document.querySelector('input[name="t4"]:checked') ? document.querySelector('input[name="t4"]:checked').value : '',
+                mobileNumber: document.querySelector('input[name="t5"]').value.trim(),
+                companyName: document.querySelector('input[name="t8"]').value.trim(),
+                qualification: document.querySelector('select[name="t6"]').value,
+                experience: document.querySelector('input[name="t7"]').value.trim(),
+                jobId: getQueryParam('id')
+            };
+
+            const msg = document.getElementById('msg');
+            msg.innerHTML = '';
+
+            try {
+                const res = await fetch('http://localhost:8085/api/applications', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    msg.innerHTML = '<span style="color:green; font-size:18px;">Successfully Recorded...</span>';
+                    (event.target).reset();
+                } else {
+                    msg.innerHTML = '<span style="color:red; font-size:18px;">Error while saving!</span>';
+                }
+            } catch (e) {
+                msg.innerHTML = '<span style="color:red; font-size:18px;">Request failed!</span>';
+            }
+        }
+    </script>
+</head>
+<body>
+
+<a class="back-button" href="/html/main.html">Back</a>
+<h1>Application</h1>
+
+<div id="msg" class="msg"></div>
+
+<div class="container">
+    <div class="image-side">
+        <img src="/image2.jpg" alt="Image">
+    </div>
+
+    <div class="form-card">
+        <form onsubmit="submitForm(event)">
+            <label for="firstName">First Name</label>
+            <input type="text" name="t1" placeholder="First Name" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" name="t2" placeholder="Last Name" required>
+
+            <label for="dob">Date of Birth</label>
+            <input type="text" name="t3" placeholder="Date of Birth" required>
+
+            <label>Gender</label><br>
+            <input type="radio" name="t4" value="Male"> Male
+            <input type="radio" name="t4" value="Female"> Female
+
+            <br><br>
+            <label for="mobile">Mobile/Phone No.</label>
+            <input type="text" name="t5" placeholder="Mobile/Phone no." required>
+
+            <label for="company">Company Name</label>
+            <input type="text" name="t8" id="companyName" placeholder="Company Name" required>
+
+            <label for="qualification">Qualification</label>
+            <select name="t6">
+                <option value="BE/BTech">BE/BTech</option>
+                <option value="MCA">MCA</option>
+                <option value="MBA">MBA</option>
+                <option value="MMS">MMS</option>
+                <option value="BCA">BCA</option>
+                <option value="BSc-CS">BSc-CS</option>
+                <option value="BSc-Plain">BSc-Plain</option>
+                <option value="BCom">BCom</option>
+                <option value="BAF">BAF</option>
+                <option value="BBI">BBI</option>
+                <option value="BA">BA</option>
+            </select>
+
+            <label for="experience">Experience</label>
+            <input type="text" name="t7" placeholder="Experience" required>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</div>
+
+</body>
+<footer class="footer" style="background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto;">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422" style="color:white; text-decoration:none;">+91 9619359422</a> |
+            <a href="tel:+919930366803" style="color:white; text-decoration:none;">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in" style="color:white; text-decoration:none;">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in" style="color:white; text-decoration:none;">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media" style="margin:10px 0;">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook" style="width:30px;height:30px;"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter" style="width:30px;height:30px;"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram" style="width:30px;height:30px;"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn" style="width:30px;height:30px;"></a>
+           </div>
+       </footer>
+
+</html>
+
+

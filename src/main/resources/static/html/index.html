@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Portal </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+        body { background-color: #F3F3F3; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: black; overflow: hidden; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav ul { list-style: none; display: flex; justify-content: flex-end; align-items: center; }
+        nav li { margin: 0 15px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; border: 1px solid transparent; border-radius: 4px; padding: 8px 12px; }
+        nav a:hover { background-color: #7BC3C4; }
+        .content { padding: 2rem; text-align: center; flex: 1; margin-top: 80px; }
+        .content h1 { font-size: 3rem; color: #333; margin-bottom: 1rem; }
+        .content p { font-size: 1.2rem; color: #555; margin-bottom: 2rem; }
+        .buttons a { display: inline-block; margin: 10px; padding: 15px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .buttons .signup-btn { background-color: #6a1b9a; color: white; }
+        .buttons .signup-btn:hover { background-color: #4b0082; }
+        .buttons .learnmore-btn { background-color: #e0e0e0; color: #333; }
+        .buttons .learnmore-btn:hover { background-color: #ccc; }
+        .footer { background-color:black; color: white; text-align: center; padding: 20px 0; margin-top: auto; }
+        .footer p { margin: 5px 0; }
+        .footer a { color: white; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .social-media { margin: 10px 0; }
+        .social-media a { margin: 0 10px; text-decoration: none; color: #FFD700; display: inline-block; }
+        .social-media a img { width: 30px; height: 30px; vertical-align: middle; }
+        .social-media a:hover img { filter: brightness(0.8); }
+        .slideshow-container { max-width: 1150px; position: relative; margin: auto; }
+        .text { color: #f2f2f2; font-size: 15px; padding: 8px 12px; position: absolute; bottom: 8px; width: 100%; text-align: center; }
+        .numbertext { color: #f2f2f2; font-size: 12px; padding: 8px 12px; position: absolute; top: 0; }
+        .dot { height: 15px; width: 15px; margin: 0 2px; background-color: #bbb; border-radius: 50%; display: inline-block; transition: background-color 0.6s ease; }
+        .active { background-color: #717171; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+        @media only screen and (max-width: 300px) { .text {font-size: 11px} }
+        .row > .column { padding: 0 8px; }
+        .column { float: left; width: 25%; }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var link = document.querySelector('a[href="#contact"]');
+            if (link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    var footer = document.getElementById('footer');
+                    if (footer) { footer.scrollIntoView({ behavior: 'smooth' }); }
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+        <img src="/jobs-portal.jpg" width="70" height="70" >
+        <a href="#" class="logo">Job Portal</a>
+        </ul>
+        <ul>
+            <li><a href="/html/about.html">About</a></li>
+            <li><a href="/html/register.html">Signup</a></li>
+            <li><a href="/html/login.html">Login</a></li>
+        
+        </ul>
+    </nav>
+    <div >
+        <h3><marquee>Explore niche job portal that focuses on specific industries or job types relevant to your career goals.</marquee></h3>
+        <h1 style="text-align: center">Find your dream job now</h1>
+        <p style="text-align: center">5 lakh+ jobs for to explore</p>
+       
+       <div class="slideshow-container">
+           
+<div class="mySlides fade">
+  <div class="numbertext">1 / 4</div>
+  <img src="/back1.jpg" width="1150" height="400" >
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">2 / 4</div>
+  <img src="/back2.jpeg" width="1150" height="400" >
+  <div class="text"></div>
+</div>
+
+<div class="mySlides fade">
+  <div class="numbertext">3 / 4</div>
+  <img src="/back4.jpg" width="1150" height="400" >
+  <div class="text"></div>
+</div>
+
+ <div class="mySlides fade">
+  <div class="numbertext">4 / 4</div>
+  <img src="/back3.webp" width="1150" height="400" >
+  <div class="text"></div>
+</div>
+           
+</div>
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+        </div>
+    </div>
+    
+<div class="row">
+  <div class="column">
+    <img src="/back5.jpeg" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/back6.jpg" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/back7.png" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/back8.jpg" style="width:100%" class="hover-shadow cursor">
+  </div>
+</div>
+    </br>
+   <footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+       <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+           <a href="tel:+919930366803">+91 9930366803</a> <br>
+           <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+           <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+       </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+</body>
+</html>
+
+

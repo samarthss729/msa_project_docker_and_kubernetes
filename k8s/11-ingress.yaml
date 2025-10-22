@@ -1,0 +1,57 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: job-portal-ingress
+  namespace: job-portal
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: job-portal.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service-service
+            port:
+              number: 8085
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: api-gateway-service
+            port:
+              number: 8080
+      - path: /eureka
+        pathType: Prefix
+        backend:
+          service:
+            name: eureka-server-service
+            port:
+              number: 8761
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: job-portal-loadbalancer
+  namespace: job-portal
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8085
+    protocol: TCP
+    name: frontend
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: api-gateway
+  - port: 8761
+    targetPort: 8761
+    protocol: TCP
+    name: eureka
+  selector:
+    app: frontend-service

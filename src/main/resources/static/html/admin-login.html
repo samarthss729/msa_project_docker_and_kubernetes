@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Login</title>
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #F3F3F3; display: flex; flex-direction: column; min-height: 100vh; }
+        nav { background-color: black; overflow: hidden; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav ul { list-style: none; display: flex; justify-content: flex-end; align-items: center; }
+        nav li { margin: 0 15px; }
+        nav a { text-decoration: none; color: white; font-weight: bold; border: 1px solid transparent; border-radius: 4px; padding: 8px 12px; }
+        nav a:hover { background-color: #7BC3C4; }
+        h1 { text-align: center; margin-top: 40px; color: #333; }
+        .card { background-color: white; width: 350px; padding: 60px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); margin: 30px auto; }
+        .form-container input[type=text], .form-container input[type=password] { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; }
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus { background-color: #e8f0fe; outline: none; border-color: #7BC3C4; }
+        .form-container .btn { background-color: #04AA6D; color: white; padding: 14px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; }
+        .form-container .btn:hover { background-color: #038d5a; }
+        .form-container .extra-links { text-align: center; margin-top: 15px; }
+        .form-container .extra-links a { text-decoration: none; color: #04AA6D; }
+        .form-container .extra-links a:hover { text-decoration: underline; }
+        .footer { background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto; }
+        .footer a { color: white; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .social-media { margin: 10px 0; }
+        .social-media a { margin: 0 10px; display: inline-block; }
+        .social-media a img { width: 30px; height: 30px; }
+        .social-media a:hover img { filter: brightness(0.8); }
+        .error { color: #b00020; text-align: center; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <img src="/jobs-portal.jpg" width="70" height="70" alt="logo" />
+            <a href="#" class="logo">Job Portal</a>
+        </ul>
+        <ul>
+            <li><a href="/html/login.html">User Login</a></li>
+        </ul>
+    </nav>
+
+    <h1>Admin Login</h1>
+
+    <div class="card">
+        <div id="error-message" class="error" style="display: none;">Invalid admin credentials.</div>
+        <form id="admin-login-form" class="form-container">
+            <label for="username"><b>Username</b></label>
+            <input type="text" placeholder="Enter Admin Username" name="username" id="username" required>
+
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Admin Password" name="password" id="password" required>
+
+            <button type="submit" class="btn">Login</button>
+
+            <div class="extra-links">
+                <p><a href="/html/index.html">Go to Home</a></p>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+            <a href="tel:+919930366803">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+
+    <script>
+        document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username: username, password: password })
+                });
+                
+                if (response.ok) {
+                    window.location.href = '/html/admin-dashboard.html';
+                } else {
+                    errorDiv.style.display = 'block';
+                }
+            } catch (error) {
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

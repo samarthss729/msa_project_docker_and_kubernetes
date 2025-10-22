@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Final Applications</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #F3F3F3; margin: 0; }
+        nav { background-color: black; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav a { color: white; text-decoration: none; font-weight: bold; margin-left: 15px; }
+        nav a:hover { background-color: #7BC3C4; border-radius: 5px; padding: 8px 12px; }
+        .container { padding: 20px 30px; }
+        h2 { margin: 10px 0 20px; }
+        .actions { margin-bottom: 15px; }
+        .actions a { background-color: #04AA6D; color: white; padding: 10px 16px; text-decoration: none; border-radius: 6px; }
+        .actions a:hover { background-color: #038f5b; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 2px 2px 12px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f0f0f0; }
+    </style>
+    <script>
+        async function loadApplications() {
+            const tbody = document.getElementById('tbody');
+            tbody.innerHTML = '<tr><td colspan="9">Loading...</td></tr>';
+            try {
+                const res = await fetch('http://localhost:8085/api/applications');
+                const data = await res.json();
+                tbody.innerHTML = '';
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.id}</td>
+                        <td>${row.firstName || ''}</td>
+                        <td>${row.lastName || ''}</td>
+                        <td>${row.dateOfBirth || ''}</td>
+                        <td>${row.gender || ''}</td>
+                        <td>${row.mobileNumber || ''}</td>
+                        <td>${row.companyName || ''}</td>
+                        <td>${row.qualification || ''}</td>
+                        <td>${row.experience || ''}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center">No applications found.</td></tr>';
+                }
+            } catch (e) {
+                tbody.innerHTML = '<tr><td colspan="9" style="color:red">Failed to load applications.</td></tr>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadApplications);
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="/jobs-portal.jpg" width="50" height="50">
+            <a href="#" class="logo">Job Portal - Admin</a>
+        </div>
+        <div>
+            <a href="/html/admin-dashboard.html">Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>Final Applications</h2>
+        <div class="actions">
+            <a href="/html/admin-dashboard.html">Back to Dashboard</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>DOB</th>
+                    <th>Gender</th>
+                    <th>Mobile</th>
+                    <th>Company</th>
+                    <th>Qualification</th>
+                    <th>Experience</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+</body>
+<footer class="footer" style="background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto;">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422" style="color:white; text-decoration:none;">+91 9619359422</a> |
+            <a href="tel:+919930366803" style="color:white; text-decoration:none;">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in" style="color:white; text-decoration:none;">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in" style="color:white; text-decoration:none;">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media" style="margin:10px 0;">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook" style="width:30px;height:30px;"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter" style="width:30px;height:30px;"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram" style="width:30px;height:30px;"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn" style="width:30px;height:30px;"></a>
+           </div>
+       </footer>
+
+</html>
+
+
+

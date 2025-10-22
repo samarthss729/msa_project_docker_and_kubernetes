@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Details</title>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px; display: flex; justify-content: center; }
+        .container { background-color: #fff; border-radius: 8px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); width: 80%; max-width: 900px; padding: 20px; }
+        .section { margin: 10px 0; }
+        .label { font-weight: bold; }
+        .back-button { display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #0073e6; color: white; text-decoration: none; border-radius: 6px; transition: background-color 0.3s ease; }
+        .back-button:hover { background-color: #005bb5; }
+    </style>
+    <script>
+        function getParam(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        async function loadDetails() {
+            const id = getParam('id');
+            if (!id) { document.body.innerHTML = '<p>Missing job id.</p>'; return; }
+            const res = await fetch('http://localhost:8085/api/jobs/' + id);
+            if (!res.ok) { document.body.innerHTML = '<p>Job not found.</p>'; return; }
+            const j = await res.json();
+            const c = document.getElementById('container');
+            c.innerHTML = `
+                <h2>${j.jobTitle || ''} at ${j.company || ''}</h2><br>
+                <div class="section"><span class="label">Intro:</span> <p>${j.intro || ''}</p></div>
+                <div class="section"><span class="label">Company Website:</span> <a href="${j.website || '#'}" target="_blank">${j.website || ''}</a></div>
+                <div class="section"><span class="label">Description:</span> <p>${j.fullDescription || ''}</p></div>
+                <div class="section"><span class="label">Location:</span> <span>${j.location || ''}</span></div>
+                <div class="section"><span class="label">Experience:</span> <span>${j.experience || ''}</span></div>
+                <div class="section"><span class="label">Skills:</span> <span>${j.skillSet || ''}</span></div>
+                <div class="section"><span class="label">Role:</span> <span>${j.role || ''}</span></div>
+                <div class="section"><span class="label">Industry:</span> <span>${j.industryType || ''}</span></div>
+                <div class="section"><span class="label">Department:</span> <span>${j.department || ''}</span></div>
+                <div class="section"><span class="label">Employment Type:</span> <span>${j.employmentType || ''}</span></div>
+                <div class="section"><span class="label">Role Category:</span> <span>${j.roleCategory || ''}</span></div>
+                <div class="section"><span class="label">UG Education:</span> <span>${j.ugEducation || ''}</span></div>
+                <div class="section"><span class="label">PG Education:</span> <span>${j.pgEducation || ''}</span></div>
+                <div class="section"><span class="label">Key Skills:</span> <span>${j.keySkills || ''}</span></div>
+                <a class="back-button" href="/html/main.html">Back to Job List</a>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDetails);
+    </script>
+</head>
+<body>
+    <div id="container" class="container"></div>
+    
+</body>
+<footer class="footer" style="background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto;">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422" style="color:white; text-decoration:none;">+91 9619359422</a> |
+            <a href="tel:+919930366803" style="color:white; text-decoration:none;">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in" style="color:white; text-decoration:none;">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in" style="color:white; text-decoration:none;">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media" style="margin:10px 0;">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook" style="width:30px;height:30px;"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter" style="width:30px;height:30px;"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram" style="width:30px;height:30px;"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn" style="width:30px;height:30px;"></a>
+           </div>
+       </footer>
+
+</html>
+
+
+
+

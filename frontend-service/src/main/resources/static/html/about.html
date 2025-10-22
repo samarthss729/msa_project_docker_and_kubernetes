@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Portal </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #F3F3F3;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background-color: black;
+            overflow: hidden;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            padding: 8px 12px;
+        }
+        nav a:hover {
+            background-color: #7BC3C4;
+        }
+        .content {
+            padding: 2rem;
+            text-align: center;
+            flex: 1;
+            margin-top: 80px;
+        }
+        .content h1 {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+        .buttons a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .buttons .signup-btn {
+            background-color: #6a1b9a;
+            color: white;
+        }
+        .buttons .signup-btn:hover {
+            background-color: #4b0082;
+        }
+        .buttons .learnmore-btn {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        .buttons .learnmore-btn:hover {
+            background-color: #ccc;
+        }
+        .footer {
+            background-color:black;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .social-media {
+            margin: 10px 0;
+        }
+        .social-media a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #FFD700;
+            display: inline-block;
+        }
+        .social-media a img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+        }
+        .social-media a:hover img {
+            filter: brightness(0.8);
+        }
+        * {box-sizing: border-box;}
+        body {font-family: Verdana, sans-serif;}
+        .mySlides {display: none;}
+        img {vertical-align: middle;}
+        .slideshow-container { max-width: 1150px; position: relative; margin: auto; }
+        .text { color: #f2f2f2; font-size: 15px; padding: 8px 12px; position: absolute; bottom: 8px; width: 100%; text-align: center; }
+        .numbertext { color: #f2f2f2; font-size: 12px; padding: 8px 12px; position: absolute; top: 0; }
+        .dot { height: 15px; width: 15px; margin: 0 2px; background-color: #bbb; border-radius: 50%; display: inline-block; transition: background-color 0.6s ease; }
+        .active { background-color: #717171; }
+        .fade { animation-name: fade; animation-duration: 1.5s; }
+        @keyframes fade { from {opacity: .4} to {opacity: 1} }
+        @media only screen and (max-width: 300px) { .text {font-size: 11px} }
+        body { font-family: Verdana, sans-serif; margin: 00; }
+        * { box-sizing: border-box; }
+        .row > .column { padding: 0 8px; }
+        .column { float: left; width: 25%; }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var link = document.querySelector('a[href="#contact"]');
+            if (link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    var footer = document.getElementById('footer');
+                    if (footer) { footer.scrollIntoView({ behavior: 'smooth' }); }
+                });
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+        <img src="/jobs-portal.jpg" width ="70px" height= "70px" >
+        </ul>
+        <ul>
+            <li><a href="/html/index.html">Home</a></li>
+            <li><a href="/html/register.html">Signup</a></li>
+            <li><a href="/html/login.html">Login</a></li>
+        </ul>
+    </nav>
+    </br>
+    <div class="row">
+  <div class="column">
+    <img src="/about55.jpeg" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/about2_1.jpg" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/about3.jpeg" style="width:100%" class="hover-shadow cursor">
+  </div>
+  <div class="column">
+    <img src="/about4.jpg" style="width:100%" class="hover-shadow cursor">
+  </div>
+</div>
+    </br>
+<center>
+    <p>Welcome to Online Job Portal, your gateway to finding the</br> 
+        perfect job or the ideal candidate. We are dedicated to</br> 
+connecting talented individuals with exciting career</br> 
+opportunities across various industries. Whether you're a </br>
+seasoned professional or just starting your career journey,</br> 
+Online Job Portal provides a user-friendly platform to match </br>
+your skills with employers who are looking for your expertise.</p></br></br> 
+<p1>Our mission is to simplify the job search process for both job </br>
+seekers and employers. With a robust database of job listings</br> 
+and a suite of tools designed to streamline recruitment, we </br>
+strive to make finding and filling positions efficient and effective.</p1></br></br></br> 
+<p2>At Online Job Portal, we believe in the power of connections.</br> 
+Join our community today and let us help you take the next </br>
+step in your career or find the perfect addition to your team.</p2>
+</center>
+    </br>
+    <footer class="footer">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422">+91 9619359422</a> |
+            <a href="tel:+919930366803">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn"></a>
+           </div>
+       </footer>
+    
+</body>
+</html>
+
+

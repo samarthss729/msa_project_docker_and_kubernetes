@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-portal-config
+  namespace: job-portal
+data:
+  # Database Configuration
+  SPRING_DATASOURCE_URL: "jdbc:mysql://mysql-service:3306/job_portal"
+  SPRING_DATASOURCE_USERNAME: "jobuser"
+  SPRING_DATASOURCE_PASSWORD: "jobpassword"
+  
+  # Eureka Configuration
+  EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE: "http://eureka-server-service:8761/eureka/"
+  
+  # Spring Profiles
+  SPRING_PROFILES_ACTIVE: "kubernetes"
+  
+  # JVM Options
+  JAVA_OPTS: "-Xmx512m -Xms256m"

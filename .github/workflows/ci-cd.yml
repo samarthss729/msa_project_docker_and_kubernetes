@@ -1,0 +1,101 @@
+name: CI/CD Pipeline for Job Portal Microservices
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+env:
+  DOCKER_USERNAME: samarth00729
+  REGISTRY: docker.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        service: 
+          - eureka-server
+          - api-gateway
+          - authorization-service
+          - user-service
+          - job-service
+          - admin-service
+          - frontend-service
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+        
+    - name: Build Maven project for ${{ matrix.service }}
+      run: |
+        cd ${{ matrix.service }}
+        mvn clean package -DskipTests
+        
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.DOCKER_USERNAME }}/job-portal-${{ matrix.service }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+          
+    - name: Build and push Docker image for ${{ matrix.service }}
+      uses: docker/build-push-action@v5
+      with:
+        context: ./${{ matrix.service }}
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Image digest
+      run: echo ${{ steps.build.outputs.digest }}
+
+  deploy-notification:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Deployment Success Notification
+      run: |
+        echo "🚀 All microservices have been successfully built and pushed to Docker Hub!"
+        echo "📦 Images pushed:"
+        echo "  - samarth00729/job-portal-eureka-server:latest"
+        echo "  - samarth00729/job-portal-api-gateway:latest"
+        echo "  - samarth00729/job-portal-authorization-service:latest"
+        echo "  - samarth00729/job-portal-user-service:latest"
+        echo "  - samarth00729/job-portal-job-service:latest"
+        echo "  - samarth00729/job-portal-admin-service:latest"
+        echo "  - samarth00729/job-portal-frontend-service:latest"
+        echo ""
+        echo "🐳 You can now deploy using: docker-compose up -d"

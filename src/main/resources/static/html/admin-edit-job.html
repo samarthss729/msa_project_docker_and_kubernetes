@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Job</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, Helvetica, sans-serif; background-color: #F3F3F3; margin: 0; }
+        nav { background-color: black; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        nav .logo { color: white; font-size: 24px; font-weight: bold; text-decoration: none; }
+        nav a { color: white; text-decoration: none; font-weight: bold; margin-left: 15px; }
+        nav a:hover { background-color: #7BC3C4; border-radius: 5px; padding: 8px 12px; }
+        .container { max-width: 900px; margin: 25px auto; background: white; padding: 20px 24px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .grid .full { grid-column: span 2; }
+        label { font-weight: bold; display: block; margin-bottom: 6px; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        textarea { min-height: 100px; resize: vertical; }
+        .actions { margin-top: 16px; display: flex; gap: 10px; }
+        .btn { background-color: #04AA6D; color: white; padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn.secondary { background-color: #777; }
+        .msg { margin-bottom: 10px; min-height: 22px; }
+    </style>
+    <script>
+        function qp(name) { return new URLSearchParams(window.location.search).get(name); }
+
+        async function loadJob() {
+            const id = qp('id');
+            if (!id) { window.location.href = '/html/admin-dashboard.html'; return; }
+            const msg = document.getElementById('msg');
+            msg.textContent = '';
+            try {
+                const res = await fetch(`/api/admin/jobs/${id}`);
+                const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.message || 'Failed');
+                const j = data.job || {};
+                document.getElementById('jobTitle').value = j.jobTitle || '';
+                document.getElementById('company').value = j.company || '';
+                document.getElementById('role').value = j.role || '';
+                document.getElementById('location').value = j.location || '';
+                document.getElementById('experience').value = j.experience || '';
+                document.getElementById('description').value = j.description || '';
+                document.getElementById('requirements').value = j.requirements || '';
+            } catch (e) {
+                msg.style.color = 'red';
+                msg.textContent = 'Failed to load job.';
+            }
+        }
+
+        async function saveJob(event) {
+            event.preventDefault();
+            const id = qp('id');
+            const msg = document.getElementById('msg');
+            msg.textContent = '';
+            const payload = {
+                jobTitle: document.getElementById('jobTitle').value.trim(),
+                company: document.getElementById('company').value.trim(),
+                role: document.getElementById('role').value.trim(),
+                location: document.getElementById('location').value.trim(),
+                experience: document.getElementById('experience').value.trim(),
+                description: document.getElementById('description').value.trim(),
+                requirements: document.getElementById('requirements').value.trim()
+            };
+            try {
+                const res = await fetch(`/api/admin/jobs/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (!res.ok || !data.success) throw new Error(data.message || 'Failed');
+                msg.style.color = 'green';
+                msg.textContent = 'Saved successfully';
+                setTimeout(() => { window.location.href = '/html/admin-dashboard.html'; }, 800);
+            } catch (e) {
+                msg.style.color = 'red';
+                msg.textContent = 'Save failed';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadJob);
+    </script>
+</head>
+<body>
+    <nav>
+        <div>
+            <img src="/jobs-portal.jpg" width="50" height="50">
+            <a href="#" class="logo">Job Portal - Admin</a>
+        </div>
+        <div>
+            <a href="/html/admin-dashboard.html">Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="msg" class="msg"></div>
+        <form onsubmit="saveJob(event)">
+            <div class="grid">
+                <div>
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" required>
+                </div>
+                <div>
+                    <label for="company">Company</label>
+                    <input type="text" id="company" required>
+                </div>
+                <div>
+                    <label for="role">Role</label>
+                    <input type="text" id="role" required>
+                </div>
+                <div>
+                    <label for="location">Location</label>
+                    <input type="text" id="location">
+                </div>
+                <div>
+                    <label for="experience">Experience</label>
+                    <input type="text" id="experience">
+                </div>
+                <div class="full">
+                    <label for="requirements">Requirements</label>
+                    <textarea id="requirements"></textarea>
+                </div>
+                <div class="full">
+                    <label for="description">Description</label>
+                    <textarea id="description"></textarea>
+                </div>
+            </div>
+            <div class="actions">
+                <button type="submit" class="btn">Save</button>
+                <a class="btn secondary" href="/html/admin-dashboard.html">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <footer class="footer" style="background-color: black; color: white; text-align: center; padding: 20px 0; margin-top: auto;">
+           <p>All rights reserved.&copy; 2025 . Job Portal Ltd.</p>
+        <p>Contact no.: <a href="tel:+919619359422" style="color:white; text-decoration:none;">+91 9619359422</a> |
+            <a href="tel:+919930366803" style="color:white; text-decoration:none;">+91 9930366803</a> <br>
+            <a href="mailto:SAVIO.FERNANDES098@nmims.in" style="color:white; text-decoration:none;">SAVIO.FERNANDES098@nmims.in</a> |
+            <a href="mailto:SAMARTH.SAMEL72@nmims.in" style="color:white; text-decoration:none;">SAMARTH.SAMEL72@nmims.in</a>
+        </p>
+           <div class="social-media" style="margin:10px 0;">
+               <a href="https://facebook.com" target="_blank"><img src="/facebook.jpg" alt="Facebook" style="width:30px;height:30px;"></a>
+               <a href="https://twitter.com" target="_blank"><img src="/twitter.jpg" alt="Twitter" style="width:30px;height:30px;"></a>
+               <a href="https://instagram.com" target="_blank"><img src="/insta.jpg" alt="Instagram" style="width:30px;height:30px;"></a>
+               <a href="https://linkedin.com" target="_blank"><img src="/linkedin.jpg" alt="LinkedIn" style="width:30px;height:30px;"></a>
+           </div>
+       </footer>
+
+</body>
+</html>
+
+
